@@ -1,0 +1,48 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Buscar expeditende</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form [formGroup]="formSearch" class="formBusqueda">
+            <mat-form-field appearance="legacy">
+                <mat-label>N° de expediente</mat-label>
+                <input matInput placeholder="N° expediente" name="id" formControlName="id">
+                <mat-icon matSuffix>assignment</mat-icon>
+                <mat-error *ngIf="formSearch.controls.id.errors">
+                    <span>
+                        El expediente es obligatorio
+                    </span>
+                </mat-error>
+            </mat-form-field>
+
+            <button mat-raised-button (click)="searchExpediente()" color="primary"> Buscar <mat-icon>search</mat-icon> </button>
+        </form>
+
+        <div class="contenedor" *ngIf="expediente">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>{{expediente.nombre}}</mat-card-title>
+                    <mat-card-subtitle>Expediente {{expediente.id}}</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <p>
+                        Fecha de creación: {{getFecha(expediente.createdAt)}}
+                    </p>
+                    <p>
+                        Tipo de sangre: {{expediente.tipos_sangre.nombre}}
+                    </p>
+                    <p>
+                        Alergia: {{expediente.alergia.nombre}}
+                    </p>
+
+                    <p>
+                        Medicamento: {{expediente.alergia.medicamento}}
+                    </p>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-raised-button (click)="limpiar()" color="accent">Ok</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </mat-card-content>
+</mat-card>

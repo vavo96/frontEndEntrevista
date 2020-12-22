@@ -1,0 +1,62 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Registrar nuevo expediente</mat-card-title>
+        <mat-card-subtitle>Registra el expediente del nuevo paciente</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <form [formGroup]="formPaciente" class="formPacientes">
+
+            <mat-form-field appearance="legacy">
+                <mat-label>N° de expediente</mat-label>
+                <input matInput placeholder="N° expediente" name="id" formControlName="id">
+                <mat-icon matSuffix>assignment</mat-icon>
+                <mat-error *ngIf="formPaciente.controls.id.errors">
+                    <span>
+                        El expediente es obligatorio
+                    </span>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="legacy">
+                <mat-label>Nombre</mat-label>
+                <input matInput placeholder="Nombre" name="nombre" formControlName="nombre">
+                <mat-icon matSuffix>person</mat-icon>
+                <mat-error *ngIf="formPaciente.controls.nombre.errors">
+                    <span>
+                        El nombre es obligatorio
+                    </span>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="legacy">
+                <mat-label>Alergias</mat-label>
+                <mat-select name="alergiaId" formControlName="alergiaId">
+                    <mat-option *ngFor="let alergia of alergias" [value]="alergia.id">{{alergia.nombre}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="formPaciente.controls.alergiaId.errors">
+                    <span>
+                        Seleccione una alergia
+                    </span>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="legacy">
+                <mat-label>Tipo de sangre</mat-label>
+                <mat-select name="tiposSangreId" formControlName="tiposSangreId">
+                    <mat-option *ngFor="let tipoSangre of tiposDeSangre" [value]="tipoSangre.id">{{tipoSangre.nombre}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="formPaciente.controls.tiposSangreId.errors">
+                    <span>
+                        Seleccione su tipo de sangre
+                    </span>
+                </mat-error>
+            </mat-form-field>
+
+            <div class="actions">
+                <button mat-raised-button color="primary" (click)="guardarPaciente()">Guardar</button>
+                <button mat-raised-button color="warn" (click)="cancelar()">Cancelar</button>
+            </div>
+
+        </form>
+    </mat-card-content>
+</mat-card>
