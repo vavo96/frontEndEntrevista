@@ -73,7 +73,7 @@ export class PeticionesService {
   manejoError(error: HttpErrorResponse): Observable<never> {
     switch (error.status) {
       case 400:
-        if(error.error.errors){
+        if (error.error.errors) {
           const errores = Object.keys(error.error.errors);
           Swal.fire('Error', error.error.errors[errores[0]].msg, 'error');
         } else {
